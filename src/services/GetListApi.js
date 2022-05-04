@@ -1,9 +1,3 @@
-//https://owen-wilson-wow-api.herokuapp.com/wows/random?results=50
-
-/*Poster (poster)
-Película (movie)
-Frase completa (full_line)
-Año (year)*/
 const url = "https://owen-wilson-wow-api.herokuapp.com/wows/random?results=50"
 const getWowList = () => {
     return fetch(url)

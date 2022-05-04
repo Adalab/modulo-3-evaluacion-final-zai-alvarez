@@ -1,5 +1,5 @@
-//    -Crear la estrucutra
-//  x -Crear el listado de películas
+//   x-Crear la estrucutra
+//   x-Crear el listado de películas
 //    -Filtrar por película
 //    -Filtrar por año
 //    -Crear componentes
@@ -7,52 +7,33 @@
 //    -Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
 
 import '../styles/App.scss';
-import getWowList from '../services/WowListApi';
+import getListApi from '../services/GetListApi';
 import { useEffect, useState } from 'react';
+import Form from "./Form";
+import MovieList from "./MovieList"
 
 function App() {
   //Creo mi variable de estado con un array vacio
-  const [dataWowList, setWowList] = useState([]);
+  const [dataList, setList] = useState([]);
 
   //Para que se ejecute una sola vez cuand cargue la página
   useEffect(() => {
-    getWowList().then((dataCleanWow) => {
-      console.log(dataCleanWow);
-      setWowList(dataCleanWow);
+    getListApi().then((dataClean) => {
+      console.log(dataClean);
+      setList(dataClean);
     })
   }, [])
 
   return (
     <div className="App">
-      <form action="">
+      <header>
         <h1 className='title'>owen wilson's "wow"</h1>
-        <div className='container_input'>
-          <label htmlFor="Movie" className='label'>Movie
-            <input
-              className="input"
-              type="text"
-              name="Movie"
-              id="Movie"
-            //value={ }
-            //onChange={ }
-            />
-          </label>
+      </header>
+      <main>
+        <Form />
+      </main>
 
-          <label htmlFor="Year" className='label'> Year
-            <select
-              className="input"
-              type="text"
-              name="Year"
-              id="Year"
-            //value={ }
-            //onChange={ } 
-            >
-              <option value="all">Todos</option>
-
-            </select>
-          </label>
-        </div>
-      </form>
+      <MovieList movies={dataList} />
     </div >
   );
 }

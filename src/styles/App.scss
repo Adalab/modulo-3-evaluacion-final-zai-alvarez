@@ -10,3 +10,21 @@ color: rgb(116, 58, 186);
   display: flex;
   justify-content: center;
 }
+
+.poster{
+  width: 150px;
+}
+.list_card{
+  list-style: none;
+  display: grid;
+  grid-template-columns: 50% 50% 50%;
+  
+}
+.card_movie{
+  border: solid 3px;
+  border-radius: 10%;
+  text-align: center;
+}
+.container_title{
+  background-color: rgb(186, 152, 218);
+}
