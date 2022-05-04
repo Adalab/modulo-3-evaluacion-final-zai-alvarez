@@ -9,8 +9,12 @@
 import '../styles/App.scss';
 import getListApi from '../services/GetListApi';
 import { useEffect, useState } from 'react';
-import Form from "./Form";
-import MovieList from "./MovieList"
+
+import MovieList from "./MovieList";
+import Filters from "./Filters";
+import MovieFilterYear from "./MovieFilterYear";
+import MovieFilterName from "./MovieFilterName";
+
 
 function App() {
   //Creo mi variable de estado con un array vacio
@@ -23,17 +27,30 @@ function App() {
       setList(dataClean);
     })
   }, [])
+  //----------------------
+  const [filterMovieName, setFilterMovieName] = useState('');
 
+  const FilterNameFunction = (value) => {
+    setFilterMovieName(value)
+  }
+  //---------------------
+  const movieFilter = dataList.filter((movie) => {
+    return movie.movie === filterMovieName;
+  });
   return (
     <div className="App">
       <header>
         <h1 className='title'>owen wilson's "wow"</h1>
       </header>
       <main>
-        <Form />
+        <Filters FilterNameFunction={FilterNameFunction} />
+
+        <MovieList movies={movieFilter} />
+
+
       </main>
 
-      <MovieList movies={dataList} />
+
     </div >
   );
 }
