@@ -9,10 +9,8 @@ function MovieFilterYear(props) {
             return (
                 <option key={index} value={uniqueYear}>{uniqueYear}</option>
             )
-        })
-    }
-
-
+        });
+    };
 
     return <>
         <label htmlFor="Year" className='label'> Año</label>
@@ -24,7 +22,7 @@ function MovieFilterYear(props) {
             onChange={handleSelectYear}
         >
             <option value="all">Todos</option>
-            {selectOptionsYear}
+            {selectOptionsYear()}
 
         </select>
 

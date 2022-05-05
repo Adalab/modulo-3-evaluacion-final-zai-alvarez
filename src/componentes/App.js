@@ -1,8 +1,8 @@
 //   x-Crear la estrucutra
 //   x-Crear el listado de películas
-//    -Filtrar por película
-//    -Filtrar por año
-//    -Crear componentes
+//   x-Filtrar por película
+//   x-Filtrar por año
+//   x-Crear componentes
 //    -Hacer clic en una tarjeta y que aparezca en pantalla completa
 //    -Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
 
@@ -10,15 +10,20 @@ import '../styles/App.scss';
 import getListApi from '../services/GetListApi';
 import { useEffect, useState } from 'react';
 
-import MovieList from "./MovieList";
+import MovieSceneList from "./MovieSceneList";
 import Filters from "./Filters";
+
+import { Routes, Route, Link } from 'react-router-dom'
+import { matchPath, useLocation } from 'react-router';
+
+import MovieSceneDetail from './MovieSceneDetail';
 
 
 
 
 
 function App() {
-  //Creo mi variable de estado con un array vacio
+  //Variable de estado con un datos de la api
   const [dataList, setList] = useState([]);
 
   //Variable de estado para filtrar por nombre de película
@@ -36,15 +41,18 @@ function App() {
     })
   }, [])
 
-  //Creo una función de filtrado a la que de doy un valor
+  //Creo una función de filtrado a la que de doy un valor para filtrar por NOMBRE
   const FilterNameFunction = (value) => {
     setFilterMovieName(value)
   }
 
-  //---------------------
+  //Creo una función de filtrado a la que de doy un valor para filtrar por AÑO
+  const FilterYearFunction = (value) => {
+    setFilterMovieYear(value)
+  }
 
-  //Para filtrar 
 
+  //Para que se salgan todas las películas
   const movieFilter = dataList
     .filter((movie) => {
       if (filterMovieName === "") {
@@ -65,13 +73,9 @@ function App() {
         return movie.year === parseInt(filterMovieYear)
       }
     })
-  //-----------------------------
-  const FilterYearFunction = (value) => {
-    setFilterMovieYear(value)
-  }
 
 
-  //Para filtrar los años que necesito del select
+  //Para evitar repetir años al filtrar
   const getYears = () => {
     const years = dataList.map((uniqueYear) => uniqueYear.year);
     const onlyYear = years.filter((item, index) => {
@@ -81,6 +85,17 @@ function App() {
     return onlyYear;
 
   };
+  //-----------------------RUTAS---------------//
+  const { pathname } = useLocation();
+
+  const dataPath = matchPath('/movie/:id', pathname);
+
+  console.log(dataPath);
+
+  const movieId = dataPath !== null ? dataPath.params.id : null;
+
+
+  const sceneFound = dataList.find((item) => item.id === movieId);
 
   return (
     <div className="App">
@@ -88,18 +103,28 @@ function App() {
         <h1 className='title'>owen wilson's "wow"</h1>
       </header>
       <main>
-        <Filters
-          FilterNameFunction={FilterNameFunction} FilterYearFunction={FilterYearFunction}
-          getYears={getYears()}
-        />
+        <Routes>
+          <Route path='/' element={
+            <>
+              <Filters
+                FilterNameFunction={FilterNameFunction} FilterYearFunction={FilterYearFunction}
+                getYears={getYears()}
+              />
+
+              <MovieSceneList movies={movieFilter} />
+            </>
+          }
+          />
+          <Route
+            path='/movie/:id'
+            element={<MovieSceneDetail sceneFound={sceneFound} />}
+          />
 
 
-        <MovieList movies={movieFilter} />
+        </Routes>
 
 
       </main>
-
-
     </div >
   );
 }
