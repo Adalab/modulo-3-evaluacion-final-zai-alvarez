@@ -1,22 +1,37 @@
-function MovieFilterYear() {
-    return <>
-        <label htmlFor="Año" className='label'> Año
-            <select
-                className="input"
-                type="text"
-                name="Year"
-                id="Year"
-            //value={ }
-            //onChange={}
-            >
-                <option value="all">Todos</option>
+function MovieFilterYear(props) {
 
-            </select>
-        </label>
+    const handleSelectYear = (ev) => {
+        props.getYears(ev.target.value);
+
+    };
+    const selectOptionsYear = () => {
+        return props.getYears.map((uniqueYear, index) => {
+            return (
+                <option key={index} value={uniqueYear}>{uniqueYear}</option>
+            )
+        })
+    }
+
+
+
+    return <>
+        <label htmlFor="Year" className='label'> Año</label>
+        <select
+            className="input"
+            name="YearFilter"
+            id="YearFilter"
+            value={props.filterMovieYear}
+            onChange={handleSelectYear}
+        >
+            <option value="all">Todos</option>
+            {selectOptionsYear}
+
+        </select>
+
     </>
 
-
 }
+
 
 
 export default MovieFilterYear;

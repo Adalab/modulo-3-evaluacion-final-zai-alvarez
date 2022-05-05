@@ -12,13 +12,21 @@ import { useEffect, useState } from 'react';
 
 import MovieList from "./MovieList";
 import Filters from "./Filters";
-import MovieFilterYear from "./MovieFilterYear";
-import MovieFilterName from "./MovieFilterName";
+
+
+
 
 
 function App() {
   //Creo mi variable de estado con un array vacio
   const [dataList, setList] = useState([]);
+
+  //Variable de estado para filtrar por nombre de película
+  const [filterMovieName, setFilterMovieName] = useState('');
+
+  //Variable de estado para filtrar por año
+  const [filterMovieYear, setFilterMovieYear] = useState('All');
+
 
   //Para que se ejecute una sola vez cuand cargue la página
   useEffect(() => {
@@ -27,23 +35,64 @@ function App() {
       setList(dataClean);
     })
   }, [])
-  //----------------------
-  const [filterMovieName, setFilterMovieName] = useState('');
 
+  //Creo una función de filtrado a la que de doy un valor
   const FilterNameFunction = (value) => {
     setFilterMovieName(value)
   }
+
   //---------------------
-  const movieFilter = dataList.filter((movie) => {
-    return movie.movie === filterMovieName;
-  });
+
+  //Para filtrar 
+
+  const movieFilter = dataList
+    .filter((movie) => {
+      if (filterMovieName === "") {
+        return true;
+      }
+      else {
+        return movie.movie === filterMovieName
+      };
+      /*
+      return filterMovieName === '' ? true : movie.movie === filterMovieName;*/
+
+    })
+    .filter((movie) => {
+      if (filterMovieYear === 'All') {
+        return true
+      }
+      else {
+        return movie.year === parseInt(filterMovieYear)
+      }
+    })
+  //-----------------------------
+  const FilterYearFunction = (value) => {
+    setFilterMovieYear(value)
+  }
+
+
+  //Para filtrar los años que necesito del select
+  const getYears = () => {
+    const years = dataList.map((uniqueYear) => uniqueYear.year);
+    const onlyYear = years.filter((item, index) => {
+      return years.indexOf(item) === index;
+    });
+    console.log(onlyYear)
+    return onlyYear;
+
+  };
+
   return (
     <div className="App">
       <header>
         <h1 className='title'>owen wilson's "wow"</h1>
       </header>
       <main>
-        <Filters FilterNameFunction={FilterNameFunction} />
+        <Filters
+          FilterNameFunction={FilterNameFunction} FilterYearFunction={FilterYearFunction}
+          getYears={getYears()}
+        />
+
 
         <MovieList movies={movieFilter} />
 
@@ -54,5 +103,6 @@ function App() {
     </div >
   );
 }
+
 
 export default App;
