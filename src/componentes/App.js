@@ -3,6 +3,9 @@
 //   x-Filtrar por película
 //   x-Filtrar por año
 //   x-Crear componentes
+//        x -MovieSceneList
+//         -MovieSceneItem
+//         -MovieSceneDetail
 //    -Hacer clic en una tarjeta y que aparezca en pantalla completa
 //    -Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
 
@@ -94,7 +97,6 @@ function App() {
 
   const movieId = dataPath !== null ? dataPath.params.id : null;
 
-
   const sceneFound = dataList.find((item) => item.id === movieId);
 
   return (
@@ -104,6 +106,7 @@ function App() {
       </header>
       <main>
         <Routes>
+          {/*-------------RUTA ESTÁTICA---------- */}
           <Route path='/' element={
             <>
               <Filters
@@ -111,18 +114,18 @@ function App() {
                 getYears={getYears()}
               />
 
-              <MovieSceneList movies={movieFilter} />
+              <MovieSceneList
+                movies={movieFilter} />
             </>
           }
+          /*-----------------------------------------------*/
           />
           <Route
-            path='/movie/:id'
+            path='/movie/id'
             element={<MovieSceneDetail sceneFound={sceneFound} />}
           />
 
-
         </Routes>
-
 
       </main>
     </div >

@@ -1,15 +1,17 @@
-
-function MovieList(props) {
+import MuvieSceneItem from "./MovieSceneItem";
+function MovieSceneList(props) {
     //Necesito transformar un array de datos  en un array de Li
-    const movieElements = props.movies.map((movie, index) => {
+    const movieElements = props.movies.map((item, index) => {
         return (
             <li key={index} className="card_movie">
 
-                <img className="poster" src={movie.poster} alt="" />
-                <div className="container_title">
-                    <h3>{movie.movie}-{movie.year}</h3>
+                {/*<MuvieSceneItem />*/}
 
-                    <h4>{movie.full_line}</h4>
+                <img className="poster" src={item.poster} alt="" />
+                <div className="container_title">
+                    <h3>{item.movie}-{item.year}</h3>
+
+                    <h4>{item.full_line}</h4>
                 </div>
             </li>
         )
@@ -21,4 +23,4 @@ function MovieList(props) {
     );
 
 }
-export default MovieList;
+export default MovieSceneList;

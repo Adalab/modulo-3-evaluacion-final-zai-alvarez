@@ -1,19 +1,20 @@
-
-const SceneItem = (props) => {
+import { Link } from 'react-router-dom';
+function MuvieSceneItem(props) {
     return (
-        <>
+        <Link to={`/movie/${props.item.id}`}>
+            <img
+                className=""
+                src={props.item.poster}
+                alt={props.item.movie}
 
-            <img className="poster"
-                src={props.movie.poster}
-                alt={props.movie.movie} />
-
+            />
             <div className="container_title">
-                <h3>{`${props.movie.movie}-${props.movie.year}`}</h3>
+                <h3>{props.item.movie} - {props.item.year}</h3>
 
-                <h4>{props.movie.full_line}</h4>
+                <h4>{props.item.full_line}</h4>
             </div>
-        </>
+        </Link>
     );
 };
 
-export default SceneItem;
+export default MuvieSceneItem;

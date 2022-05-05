@@ -5,15 +5,15 @@ const getWowList = () => {
     return fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            const dataCleanWow = data.map((quote) => {
+            const dataCleanWow = data.map((item) => {
                 return {
                     id: uuidv4(),
-                    poster: quote.poster,
-                    movie: quote.movie,
-                    full_line: quote.full_line,
-                    year: quote.year,
-                    director: quote.director,
-                    audio: quote.audio,
+                    poster: item.poster,
+                    movie: item.movie,
+                    full_line: item.full_line,
+                    year: item.year,
+                    director: item.director,
+                    audio: item.audio,
 
                 };
             });

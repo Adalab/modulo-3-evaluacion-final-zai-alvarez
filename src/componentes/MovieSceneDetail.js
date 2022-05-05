@@ -1,21 +1,22 @@
 
 const MovieSceneDetail = (props) => {
+
     return (
         <div className="container_scene">
             <section>
 
                 <img
                     className=""
-                    src={props.scene.poster}
+                    src={props.item.poster}
                     alt=""
                 />
             </section>
 
             <section>
 
-                <h2>{props.scene.movie}</h2>
-                <p>{props.scene.full_line}</p>
-                <p>{props.scene.director}</p>
+                <h2>{props.item.movie}</h2>
+                <p>{props.item.full_line}</p>
+                <p>{props.item.director}</p>
 
             </section>
 
