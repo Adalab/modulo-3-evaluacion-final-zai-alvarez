@@ -4,9 +4,9 @@
 //   x-Filtrar por año
 //   x-Crear componentes
 //        x -MovieSceneList
-//         -MovieSceneItem
-//         -MovieSceneDetail
-//    -Hacer clic en una tarjeta y que aparezca en pantalla completa
+//        x-MovieSceneItem
+//        x-MovieSceneDetail
+//   x-Hacer clic en una tarjeta y que aparezca en pantalla completa
 //    -Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
 
 import '../styles/App.scss';
@@ -26,6 +26,9 @@ import MovieSceneDetail from './MovieSceneDetail';
 
 
 function App() {
+
+  //----------VARIABLES DE ESTADO--------------------------
+
   //Variable de estado con un datos de la api
   const [dataList, setList] = useState([]);
 
@@ -35,6 +38,7 @@ function App() {
   //Variable de estado para filtrar por año
   const [filterMovieYear, setFilterMovieYear] = useState('All');
 
+  //-------------------------------------------------------------
 
   //Para que se ejecute una sola vez cuand cargue la página
   useEffect(() => {
@@ -58,14 +62,7 @@ function App() {
   //Para que se salgan todas las películas
   const movieFilter = dataList
     .filter((movie) => {
-      if (filterMovieName === "") {
-        return true;
-      }
-      else {
-        return movie.movie === filterMovieName
-      };
-      /*
-      return filterMovieName === '' ? true : movie.movie === filterMovieName;*/
+      return (movie.movie.toLowerCase().includes(filterMovieName.toLowerCase()))
 
     })
     .filter((movie) => {
