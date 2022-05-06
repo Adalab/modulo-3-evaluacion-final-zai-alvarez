@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const MovieSceneDetail = (props) => {
     console.log(props)
@@ -21,6 +21,10 @@ const MovieSceneDetail = (props) => {
                 <h2>{props.sceneFound.movie}</h2>
                 <p>{props.sceneFound.full_line}</p>
                 <p>{props.sceneFound.director}</p>
+                <a href={props.sceneFound.audio} target="_blank ">
+                    Escucha el Audio
+                </a>
+                <Link to="/">Atras</Link>
 
             </section>
 

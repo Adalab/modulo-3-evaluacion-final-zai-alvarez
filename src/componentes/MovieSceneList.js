@@ -1,5 +1,15 @@
 import MovieSceneItem from "./MovieSceneItem";
+
 function MovieSceneList(props) {
+    const smsHTML = () => {
+        let html = '';
+        if () {
+
+        }
+        else {
+
+        }
+    }
     //Necesito transformar un array de datos  en un array de Li
     const movieElements = props.movies.map((item, index) => {
         return (
@@ -10,7 +20,9 @@ function MovieSceneList(props) {
             </li>
         )
     });
+
     return (
+
         <ul className="list_card">
             {movieElements}
         </ul>
