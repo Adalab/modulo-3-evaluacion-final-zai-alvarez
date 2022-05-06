@@ -1,22 +1,26 @@
 
-const MovieSceneDetail = (props) => {
 
+const MovieSceneDetail = (props) => {
+    console.log(props)
     return (
         <div className="container_scene">
-            <section>
+
+
+            <section className="list_card">
 
                 <img
-                    className=""
-                    src={props.item.poster}
-                    alt=""
+                    className="poster"
+                    src={props.sceneFound.poster}
+                    alt={props.sceneFound.name}
+
                 />
             </section>
 
             <section>
 
-                <h2>{props.item.movie}</h2>
-                <p>{props.item.full_line}</p>
-                <p>{props.item.director}</p>
+                <h2>{props.sceneFound.movie}</h2>
+                <p>{props.sceneFound.full_line}</p>
+                <p>{props.sceneFound.director}</p>
 
             </section>
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-function MuvieSceneItem(props) {
+function MovieSceneItem(props) {
     return (
         <Link to={`/movie/${props.item.id}`}>
             <img
@@ -17,4 +17,4 @@ function MuvieSceneItem(props) {
     );
 };
 
-export default MuvieSceneItem;
+export default MovieSceneItem;

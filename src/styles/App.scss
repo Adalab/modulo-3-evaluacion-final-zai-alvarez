@@ -14,11 +14,14 @@ color: rgb(116, 58, 186);
 
 .poster{
   width: 150px;
+  height: 150px;
+  
 }
 .list_card{
   list-style: none;
   display: grid;
   grid-template-columns: 50% 50% 50%;
+  
   
 }
 .card_movie{

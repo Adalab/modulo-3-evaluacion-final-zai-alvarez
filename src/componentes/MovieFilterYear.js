@@ -1,7 +1,7 @@
 function MovieFilterYear(props) {
 
     const handleSelectYear = (ev) => {
-        props.getYears(ev.target.value);
+        props.FilterYearFunction(ev.target.value);
 
     };
     const selectOptionsYear = () => {

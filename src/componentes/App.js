@@ -121,8 +121,9 @@ function App() {
           /*-----------------------------------------------*/
           />
           <Route
-            path='/movie/id'
-            element={<MovieSceneDetail sceneFound={sceneFound} />}
+            path="/movie/:id"
+            element={<MovieSceneDetail
+              sceneFound={sceneFound} />}
           />
 
         </Routes>
