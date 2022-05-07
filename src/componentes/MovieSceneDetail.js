@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 const MovieSceneDetail = (props) => {
     console.log(props)
     return (
@@ -9,14 +10,14 @@ const MovieSceneDetail = (props) => {
             <section className="list_card">
 
                 <img
-                    className="poster"
+                    className="poster_detail"
                     src={props.sceneFound.poster}
                     alt={props.sceneFound.name}
 
                 />
             </section>
 
-            <section>
+            <section className="section_detail">
 
                 <h2>{props.sceneFound.movie}</h2>
                 <p>{props.sceneFound.full_line}</p>

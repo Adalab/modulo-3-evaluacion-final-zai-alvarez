@@ -7,10 +7,13 @@
 //        x-MovieSceneItem
 //        x-MovieSceneDetail
 //   x-Hacer clic en una tarjeta y que aparezca en pantalla completa
-//    -Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
+//   x-Detalles de calidad: etiquetas form, texto si no es encuentra película, mayúsulas y minúsculas...
 
 import '../styles/App.scss';
 import getListApi from '../services/GetListApi';
+
+import LocalStorage from '../services/localStorage'
+
 import { useEffect, useState } from 'react';
 
 import MovieSceneList from "./MovieSceneList";
@@ -23,14 +26,14 @@ import MovieSceneDetail from './MovieSceneDetail';
 
 
 
-
-
 function App() {
 
-  //----------VARIABLES DE ESTADO--------------------------
+  //------------------VARIABLES DE ESTADO--------------------------
+
+  //Necesito saber si hay datos el el LS. Si es así los agregamos a la variable de estado de todos los datos y a la de filtro por años y si no, está vacío
 
   //Variable de estado con un datos de la api
-  const [dataList, setList] = useState([]);
+  const [dataList, setList] = useState(LocalStorage.get('Lista con todas las películas', []));
 
   //Variable de estado para filtrar por nombre de película
   const [filterMovieName, setFilterMovieName] = useState('');
@@ -38,15 +41,24 @@ function App() {
   //Variable de estado para filtrar por año
   const [filterMovieYear, setFilterMovieYear] = useState('All');
 
-  //-------------------------------------------------------------
 
-  //Para que se ejecute una sola vez cuand cargue la página
   useEffect(() => {
-    getListApi().then((dataClean) => {
-      console.log(dataClean);
-      setList(dataClean);
-    })
-  }, [])
+    if (dataList.length === 0) {
+      getListApi().then((dataFromApi) => {
+
+        setList(dataFromApi);
+      });
+    }
+  }, []);
+
+
+  //---------------LOCALSTORAGE-------------------------------
+
+  useEffect(() => {
+    LocalStorage.set('Lista con todas las películas', dataList);
+    LocalStorage.set('filtrar por años', filterMovieYear);
+
+  }, [dataList, filterMovieYear]);
 
   //Creo una función de filtrado a la que de doy un valor para filtrar por NOMBRE
   const FilterNameFunction = (value) => {
