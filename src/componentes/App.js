@@ -41,6 +41,8 @@ function App() {
   //Variable de estado para filtrar por año
   const [filterMovieYear, setFilterMovieYear] = useState('All');
 
+  const [filterMovieChacarter, setFilterMovieChacarter] = useState('');
+
 
   useEffect(() => {
     if (dataList.length === 0) {
@@ -70,13 +72,26 @@ function App() {
     setFilterMovieYear(value)
   }
 
+  const FilterCharacterFuncion = (value) => {
+    setFilterMovieChacarter(value)
+  }
+
 
   //Para que se salgan todas las películas
   const movieFilter = dataList
     .filter((movie) => {
       return (movie.movie.toLowerCase().includes(filterMovieName.toLowerCase()))
 
+
     })
+
+    .filter((movie) => {
+      return (movie.character.toLowerCase().includes(filterMovieChacarter.toLocaleLowerCase()))
+    })
+
+
+
+
     .filter((movie) => {
       if (filterMovieYear === 'All') {
         return true
@@ -121,6 +136,9 @@ function App() {
               <Filters
                 FilterNameFunction={FilterNameFunction} FilterYearFunction={FilterYearFunction}
                 getYears={getYears()}
+                FilterCharacterFuncion={FilterCharacterFuncion}
+                filterMovieChacarter={filterMovieChacarter}
+
               />
 
               <MovieSceneList

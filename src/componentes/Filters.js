@@ -1,5 +1,7 @@
+import MovieFilterCharacter from "./MovieFilterCharacter";
 import MovieFilterName from "./MovieFilterName";
 import MovieFilterYear from "./MovieFilterYear";
+
 
 
 
@@ -11,6 +13,10 @@ function Filters(props) {
         <MovieFilterYear
             FilterYearFunction={props.FilterYearFunction}
             getYears={props.getYears} />
+        <MovieFilterCharacter FilterCharacterFuncion={props.FilterCharacterFuncion}
+            filterMovieChacarater={props.filterMovieChacarter}
+        />
+
 
     </form>
 }

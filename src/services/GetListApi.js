@@ -14,6 +14,7 @@ const getWowList = () => {
                     year: item.year,
                     director: item.director,
                     audio: item.audio,
+                    character: item.character,
 
                 };
             });
